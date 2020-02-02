@@ -10,7 +10,7 @@ import re
 class encaSpider(CrawlSpider):
     name = 'enca'
     allowed_domains = ['www.enca.com']
-    start_urls = ['http://www.enca.com/news-stream/south-africa']
+    start_urls = ['https://www.enca.com/news-stream/south-africa']
 
     link_extractor = LinkExtractor(allow=('/south-africa'))
     rules = (
@@ -22,7 +22,7 @@ class encaSpider(CrawlSpider):
     def parse_item(self, response):
         title = response.css('header.article-header h1').xpath('text()').extract_first()
         self.logger.info('%s %s', response.url, title)
-        
+
         publication_date = response.css('.article-meta time').xpath('@datetime').extract_first()
         body_html = response.css('.article-text').extract_first()
 
